@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部落之火文化祭 - 原住民文化體驗與市集活動</title>
+    <style>
+        /* ==========================================================================
+           1. CSS 變數與全域設定 (定調原民大地色系與慶典橘紅)
+           ========================================================================== */
+        :root {
+            --primary-color: #2C4A3E;    /* 墨綠：山林、土地與自然 */
+            --secondary-color: #D96B43;  /* 慶典橘紅：營火、熱情與傳承 */
+            --accent-color: #F4EBE1;     /* 大地米：傳統織布與石板色調 */
+            --text-dark: #2B2B2B;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Microsoft JhengHei, sans-serif;
+            scroll-behavior: smooth; /* 點擊導覽列時流暢滾動 */
+        }
+
+        body {
+            background-color: #FAF8F5;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           2. 導覽列樣式 (Header & Navigation)
+           ========================================================================== */
+        header {
+            background-color: var(--primary-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 1.4rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ==========================================================================
+           3. 區塊通用樣式 (Common Section Styles)
+           ========================================================================== */
+        section {
+            padding: 90px 20px 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* 傳統幾何圖騰風格點綴線 */
+        .section-title::after {
+            content: "◆ ◇ ◆";
+            display: block;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-top: 5px;
+            letter-spacing: 5px;
+        }
+
+        /* ==========================================================================
+           4. 主視覺區塊 (Hero Section)
+           ========================================================================== */
+        .hero {
+            background: linear-gradient(rgba(44, 74, 62, 0.7), rgba(44, 74, 62, 0.5)), 
+                        url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+
+        .cta-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(217, 107, 67, 0.4);
+            margin-top: 20px;
+        }
+
+        .cta-btn:hover {
+            background-color: #c55a33;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           5. 關於活動區塊 (About Section)
+           ========================================================================== */
+        .about-content {
+            background-color: var(--accent-color);
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           6. 活動日程卡片區塊 (Program Section)
+           ========================================================================== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-tag {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .card-time {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        /* ==========================================================================
+           7. 部落市集區塊 (Market Section)
+           ========================================================================== */
+        .market-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .market-card h4 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* ==========================================================================
+           8. 線上預約表單區塊 (Registration Section)
+           ========================================================================== */
+        .registration-bg {
+            background-color: var(--accent-color);
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(44, 74, 62, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e332b;
+        }
+
+        /* ==========================================================================
+           9. 交通指引與注意事項區塊 (Logistics Section)
+           ========================================================================== */
+        .info-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .notice-box {
+            background-color: #FFF5F5;
+            border: 1px dashed #E53E3E;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .notice-box h3 {
+            color: #E53E3E;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .notice-box ul {
+            list-style-type: none;
+        }
+
+        .notice-box li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .notice-box li::before {
+            content: "•";
+            color: #E53E3E;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* ==========================================================================
+           10. 頁尾與行動裝置響應式優化 (Footer & RWD Media Queries)
+           ========================================================================== */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 35px 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            nav a {
+                margin-left: 0;
+                padding: 5px 10px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .info-wrapper {
+                grid-template-columns: 1fr; /* 手機端改為單欄排列 */
+                gap: 30px;
+            }
+            .form-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">部落之火文化祭</div>
+            <nav>
+                <a href="#about">關於活動</a>
+                <a href="#program">活動日程</a>
+                <a href="#market">部落市集</a>
+                <a href="#registration-section">線上報名</a>
+                <a href="#logistics">交通指引</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>聆聽山林的呼喚</h1>
+        <p>走進山海之間，體驗最純粹的原民傳統樂舞、手作工藝與風土料理</p>
+        <p style="font-weight: bold; color: #FFE6CC;">📅 活動日期：2026.10.17 - 10.18 | 地點：新竹尖石鄉特富野活動會場</p>
+        <a href="#registration-section" class="cta-btn">立即預約體驗</a>
+    </div>
+
+    <section id="about">
+        <h2 class="section-title">關於活動</h2>
+        <div class="about-content">
+            <p style="margin-bottom: 15px;">本次活動旨在透過深度的部落體驗，帶領大眾跨越文化的邊界。我們秉持著地方創生與文化永續的精神，邀請在地耆老與青年共同合作。在這裡，你將不僅僅是一名觀光客，而是透過織布、歌謠與傳統獵人智慧，成為傳遞這份傳統溫度的火苗。</p>
+            <p>我們深信，文化最好的保存方式就是讓它被觸摸、被體驗、被理解。誠摯邀請您與我們一同圍繞營火，分享大地的恩賜。</p>
+        </div>
+    </section>
+
+    <section id="program">
+        <h2 class="section-title">體驗工作坊與日程</h2>
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1590736969955-71cc94801759?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-tag">文化樂舞</span>
+                    <div class="card-time">Day 1 | 10:00 - 12:00</div>
+                    <h3>開幕祈福與傳統樂舞迎賓</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 8px;">由部落長老主持莊嚴的祈福儀式，聆聽穿透山谷的傳統複音歌謠，用舞步踏響對祖靈的謝意。</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-tag">傳統工藝</span>
+                    <div class="card-time">Day 1 | 14:00 - 16:30</div>
+                    <h3>織布與幾何圖騰手作坊</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 8px;">親手體驗傳統地機織布，理解每一條彩線背後代表的家族故事，將山林的色彩編織回家。（限額 20 名）</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="card-body">
+                    <span class="card-tag">生態獵人</span>
+                    <div class="card-time">Day 2 | 09:00 - 12:00</div>
+                    <h3>獵人學校：山林與陷阱智慧</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 8px;">跟隨部落獵人的步伐走入獵道，學習辨識動物足跡、無痕山林知識，以及與自然平衡共生的古老智慧。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="market">
+        <h2 class="section-title">部落文創市集</h2>
+        <div class="grid-container">
+            <div class="market-card">
+                <h4>✦ 瑪籟手工藝坊</h4>
+                <p style="font-size: 0.9rem; color: #444; margin-top: 10px;">展出全手工編織的琉璃珠配件、傳統改制包款與木雕藝術品，每一件作品都凝聚了職人的掌心溫度。</p>
+            </div>
+            <div class="market-card">
+                <h4>✦ 山之滋味風味料理</h4>
+                <p style="font-size: 0.9rem; color: #444; margin-top: 10px;">現場販售原汁原味的馬告香腸、竹筒飯、刺蔥特調飲品以及現烤山豬肉，用味蕾記錄部落的風土。</p>
+            </div>
+            <div class="market-card">
+                <h4>✦ 小農小米酒釀</h4>
+                <p style="font-size: 0.9rem; color: #444; margin-top: 10px;">嚴選在地有機小米，遵循部落古法純手工釀造，風味甘甜、果香濃郁，是祭典不可或缺的節慶滋味。</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="registration-bg" id="registration-section">
+        <section style="padding-top: 40px; padding-bottom: 40px;">
+            <h2 class="section-title">活動線上預約</h2>
+            <div class="form-container">
+                <form action="#" method="POST" onsubmit="alert('預約成功！我們已將確認信與行前通知發送至您的 E-mail，期待在部落與您相見！'); return false;">
+                    <div class="form-group">
+                        <label for="name">真實姓名 *</label>
+                        <input type="text" id="name" class="form-control" placeholder="請輸入聯絡人真實姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">聯絡電話 *</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="例：0912345678" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">電子信箱 *</label>
+                        <input type="email" id="email" class="form-control" placeholder="例：service@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="session">欲參加的體驗場次 *</label>
+                        <select id="session" class="form-control" required>
+                            <option value="">-- 請選擇您的行程 --</option>
+                            <option value="all">兩日文化套票（含所有體驗項目）- NT$ 1,500</option>
+                            <option value="craft">Day 1 織布工藝手作坊 - NT$ 600</option>
+                            <option value="hunter">Day 2 獵人學校體驗坊 - NT$ 800</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="diet">飲食習慣（用於風味餐準備）</label>
+                        <select id="diet" class="form-control">
+                            <option value="meat">葷食</option>
+                            <option value="vegie">素食（我們將特別準備在地蔬食原民料理）</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="shuttle">高鐵接駁專車需求</label>
+                        <select id="shuttle" class="form-control">
+                            <option value="no">不需要，我會自行開車前往</option>
+                            <option value="yes">需要，我要搭乘新竹高鐵站免費接駁專車</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">送出報名並前往付款</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <section id="logistics">
+        <h2 class="section-title">交通指引與部落守則</h2>
+        <div class="info-wrapper">
+            <div>
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">如何前往</h3>
+                <p><strong>自行開車：</strong>導航至「尖石鄉青蛙石天空步道」（本次活動主會場），現場規劃有大型免費遊客停車場。</p>
+                <p style="margin-top: 10px;"><strong>大眾運輸（接駁車）：</strong>活動當日 08:30 於「新竹高鐵站 4 號出口」備有大會免費接駁專車直達部落，請於上方表單登記以便留位。</p>
+                
+                <iframe 
+                    src="下載.jpeg" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; margin-top: 20px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <a href="https://maps.app.goo.gl/g6p4gXmYhZgA8M5E9" 
+                   target="_blank" 
+                   style="display: block; text-align: center; background-color: #4285F4; color: white; text-decoration: none; padding: 12px; margin-top: 15px; border-radius: 4px; font-weight: bold; font-size: 1rem; box-shadow: 0 2px 5px rgba(66,133,244,0.3); transition: background 0.3s;">
+                   🗺️ 點我開啟 Google Maps 直接導航
+                </a>
+            </div>
+            
+            <div class="notice-box">
+                <h3>⚠️ 部落文化尊重守則</h3>
+                <ul>
+                    <li><strong>祭祀禁忌：</strong>第一天上午的祈福儀式進行時，請保持肅靜與尊重。部分核心祭祀區域未經允許請勿跨越或擅自攝影，現場將有文化嚮導引導。</li>
+                    <li><strong>環境永續：</strong>部落推行「無痕山林」與垃圾不落地，現場不提供一次性餐具，請遊客自備水杯、環保餐具。</li>
+                    <li><strong>拍攝禮貌：</strong>部落長者擁有豐富的智慧，若想為長者或在地居民拍攝特寫照片，請務必先口頭詢問、徵得對方同意。</li>
+                    <li><strong>山區氣候：</strong>尖石鄉山區早晚溫差較大，建議攜帶保暖外套與防雨裝備。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 部落之火文化祭 籌備委員會。保留所有權利。</p>
+        <p style="font-size: 0.8rem; margin-top: 8px; color: #A0B2A6;">地方創生協力專案 / 網頁已優化為 RWD 響應式體驗</p>
+    </footer>
+
+</body>
+</html>
